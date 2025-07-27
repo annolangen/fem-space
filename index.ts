@@ -16,7 +16,7 @@ const headerHtml = () =>
     <input type="checkbox" id="menu" class="peer sr-only" />
     <label for="menu" id="menu-button" class="z-20"></label>
     <nav
-      class="absolute right-0 top-0 hidden h-screen w-2/3 flex-col gap-4 bg-white/10 p-6 pt-24 text-white backdrop-blur-md peer-checked:flex"
+      class="absolute right-0 top-0 hidden h-screen w-2/3 flex-col gap-4 bg-white/10 p-6 pt-24 text-white backdrop-blur-md peer-checked:flex peer-checked:z-20"
     >
       <a href="#home">Home</a>
       <a href="#destination">Destination</a>
@@ -70,7 +70,7 @@ const destinationHtml = () =>
         />
       </div>
 
-      <div class="flex flex-col items-center gap-4 opacity-50">
+      <div class="flex flex-col items-center gap-2 opacity-50">
         <nav class="flex flex-row">
           ${data.destinations.map(
             destination =>
@@ -79,10 +79,10 @@ const destinationHtml = () =>
                   state.destination = destination;
                   renderBody();
                 }}
-                class="mx-4 uppercase tracking-widest pb-2 ${destination ==
+                class="mx-4 uppercase tracking-widest pb-2 border-b-2 ${destination ==
                 state.destination
-                  ? "border-b-2 border-white"
-                  : "border-b-2 border-transparent hover:border-white/50"}"
+                  ? "border-white"
+                  : "border-transparent hover:border-white/50"}"
               >
                 ${destination.name}
               </button>`
@@ -94,8 +94,8 @@ const destinationHtml = () =>
         <p class="text-center max-w-md px-4">
           ${state.destination.description}
         </p>
-        <hr class="w-full border-white/25 my-4" />
-        <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+        <div class="flex flex-col md:flex-row gap w-full">
+          <hr class="w-full border-white/25 my-4" />
           <div class="text-center">
             <div class="text-sm  uppercase tracking-widest">Avg. Distance</div>
             <div class="text-2xl uppercase font-serif">
