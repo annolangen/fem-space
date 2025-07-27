@@ -47,7 +47,6 @@
 
 /* Styles for the hamburger/close menu button */
 #menu-button {
-  display: block;
   width: 24px; /* hamburger icon width */
   height: 21px; /* hamburger icon height */
   cursor: pointer;
