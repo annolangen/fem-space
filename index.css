@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/* Common background properties */
+#home #destination {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+/* --- Home Page Backgrounds --- */
+#home {
+  background-image: url(./assets/home/background-home-mobile.jpg);
+}
+#destination {
+  background-image: url(./assets/destination/background-destination-mobile.jpg);
+}
+
+@media (min-width: 768px) {
+  #home {
+    background-image: url(./assets/home/background-home-tablet.jpg);
+  }
+  #destination {
+    background-image: url(./assets/destination/background-destination-tablet.jpg);
+  }
+}
+
+@media (min-width: 1024px) {
+  #home {
+    background-image: url(./assets/home/background-home-desktop.jpg);
+  }
+  #destination {
+    background-image: url(./assets/destination/background-destination-desktop.jpg);
+  }
+}
+
+/* Styles for the hamburger/close menu button */
+#menu-button {
+  display: block;
+  width: 24px; /* hamburger icon width */
+  height: 21px; /* hamburger icon height */
+  cursor: pointer;
+  background-image: url(./assets/shared/icon-hamburger.svg);
+  background-repeat: no-repeat;
+}
+
+/* When the menu is open, switch to the close icon */
+#menu:checked + #menu-button {
+  background-image: url(./assets/shared/icon-close.svg);
+}
