@@ -30,11 +30,10 @@ const homeHtml = () => html`
     id="home"
     class="h-screen flex flex-col justify-between items-center text-white bg-cover bg-center bg-no-repeat"
   >
-    ${headerHtml()}
     <main class="m-8 flex flex-col items-center gap-8">
-      <div class="text-lg">So, you want to travel to</div>
+      <div class="text-lg uppercase opacity-50">So, you want to travel to</div>
       <div class="text-8xl font-serif">SPACE</div>
-      <div class="text-center">
+      <div class="text-center opacity-50">
         You’ll never have enough time. Space Let’s face it; if you want to go to
         space, you might as well genuinely go to outer space and not hover kind
         of on the edge of it. Well sit back, and relax because we’ll give you a
@@ -42,6 +41,7 @@ const homeHtml = () => html`
       </div>
     </main>
     <button
+      @click=${() => (window.location.hash = "#destination")}
       class="m-8 text-slate-900 text-3xl bg-white rounded-full p-12 aspect-1/1"
     >
       Explore
@@ -107,13 +107,99 @@ const destinationHtml = () =>
     </main>
   </div>`;
 
+const crewHtml = () =>
+  html`<div
+    id="crew"
+    class="h-screen flex flex-col items-center text-white bg-cover bg-center bg-no-repeat"
+  >
+    ${headerHtml()}
+    <main
+      class="m-6 flex flex-col items-center gap-6 h-[85vh] max-w-lg text-blue-200"
+    >
+      <h2 class="hidden text-lg uppercase tracking-widest opacity-50">
+        <span class="font-bold mr-2">02</span> Meet your crew
+      </h2>
+
+      <div class="flex-grow flex items-center justify-center min-h-0">
+        <img
+          class="max-h-full max-w-full object-contain"
+          src=${state.crew.images.png}
+          alt=${state.crew.name}
+        />
+      </div>
+
+      <div class="flex flex-col items-center gap-2">
+        <nav class="flex flex-row">
+          ${data.crew.map(
+            crew =>
+              html`<button
+                @click=${() => {
+                  state.crew = crew;
+                }}
+                class="mx-4 h-2 w-2 rounded-full filled bg-white ${crew ==
+                state.crew
+                  ? ""
+                  : "opacity-20 hover:bg-white"}"
+              ></button>`
+          )}
+        </nav>
+        <div class="uppercase text-sm opacity-33">${state.crew.role}</div>
+        <div class="text-xl font-serif opacity-50">${state.crew.name}</div>
+        <p class="text-center max-w-md px-4 opacity-50">${state.crew.bio}</p>
+      </div>
+    </main>
+  </div>`;
+
+const technologyHtml = () =>
+  html`<div
+    id="technology"
+    class="h-screen flex flex-col items-center text-white bg-cover bg-center bg-no-repeat"
+  >
+    ${headerHtml()}
+    <main
+      class="m-6 flex flex-col items-center gap-6 h-[85vh] max-w-lg text-blue-200"
+    >
+      <h2 class="text-lg uppercase tracking-widest opacity-50">
+        <span class="font-bold mr-2">03</span> Space launch 101
+      </h2>
+
+      <div class="flex-grow flex items-center justify-center min-h-0">
+        <img
+          class="max-h-full max-w-full object-contain"
+          src=${state.technology.images.landscape}
+          alt=${state.destination.name}
+        />
+      </div>
+      <nav class="flex flex-row gap-4 opacity-50">
+        ${data.technology.map(
+          (t, i) =>
+            html`<button
+              @click=${() => (state.technology = t)}
+              class="rounded-full aspect-1/1 bg-transparent border-1"
+            >
+              ${i}
+            </button>`
+        )}
+      </nav>
+      <p class="uppercase opacity-50">The technology</p>
+      <h1 class="text-4xl md:text-8xl font-serif uppercase opacity-50">
+        ${state.technology.name}
+      </h1>
+      <p class="text-center mb-4 opacity-50">${state.technology.description}</p>
+    </main>
+  </div>`;
+
 const bodyHtml = () => {
   switch (window.location.hash) {
-    default:
-    case "#home":
-      return homeHtml();
     case "#destination":
       return destinationHtml();
+    case "#crew":
+      return crewHtml();
+    case "#technology":
+      return technologyHtml();
+    case "#home":
+    default:
+      return homeHtml();
   }
 };
 
