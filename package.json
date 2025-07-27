@@ -4,8 +4,9 @@
   "description": "![Design preview for the space form coding challenge](preview.jpg)",
   "scripts": {
     "format": "prettier --write \"*.{ts,html,css,json}\"",
-    "build": "parcel build --public-url ./ index.html",
-    "dev": "parcel index.html",
+    "clean": "rm -rf .parcel-cache dist",
+    "build": "mkdir -p dist && cp -r assets dist && parcel build --public-url ./ index.html",
+    "dev": "mkdir -p dist && cp -r assets dist && parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
