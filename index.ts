@@ -9,28 +9,26 @@ const state = {
 };
 
 const headerHtml = () =>
-  html` <header
-    class="relative flex flex-row justify-between items-center w-full px-6 pt-6"
-  >
-    <img src="/assets/shared/logo.svg" alt="logo" />
+  html`<header class="relative flex w-full flex-row items-center px-6 pt-6">
+    <img src="/assets/shared/logo.svg" alt="logo" class="h-8 w-8" />
     <input type="checkbox" id="menu" class="peer sr-only" />
-    <label for="menu" id="menu-button" class="md:hidden z-20"></label>
+    <label for="menu" id="menu-button" class="z-20 md:hidden"></label>
     <nav
-      class="absolute right-0 top-0 hidden h-screen w-2/3 flex-col gap-4 bg-white/10 p-6 pt-24 text-white backdrop-blur-md peer-checked:flex peer-checked:z-20"
+      class="absolute top-0 right-0 hidden h-screen w-2/3 flex-col gap-4 bg-white/10 p-6 pt-24 text-white backdrop-blur-md peer-checked:z-20 peer-checked:flex"
     >
       <a href="#home">Home</a>
       <a href="#destination">Destination</a>
       <a href="#crew">Crew</a>
       <a href="#technology">Technology</a>
     </nav>
-    <hr class="hidden md:block flex-grow ml-4 text-slate-700 mr-[-8rem]" />
-    <nav class="hidden md:flex flex-row gap-4 backdrop-blur p-6 z-1">
+    <hr class="mr-[-8rem] ml-4 hidden flex-grow text-slate-700 md:block" />
+    <nav class="z-1 hidden flex-row py-6 backdrop-blur md:flex">
       ${["home", "destination", "crew", "technology"].map(
         (k, i) =>
-          html`<a href="#${k}" class="mx-8">
+          html`<a href="#${k}" class="mx-4">
             <div class="flex flex-row gap-4">
               <span class="text-bold">0${i}</span>
-              <div class="uppercase tracking-widest opacity-50">${k}</div>
+              <div class="tracking-widest uppercase opacity-50">${k}</div>
             </div>
           </a>`
       )}
@@ -40,19 +38,19 @@ const headerHtml = () =>
 const homeHtml = () => html`
   <div
     id="home"
-    class="h-screen flex flex-col items-center text-white bg-cover bg-center bg-no-repeat"
+    class="flex h-screen flex-col items-center bg-cover bg-center bg-no-repeat text-white"
   >
-    <div class="hidden md:block w-screen">${headerHtml()}</div>
+    <div class="hidden w-screen md:block">${headerHtml()}</div>
     <div class="flex-grow-2"></div>
     <div
-      class="flex flex-col h-full justify-between md:flex-row w-4/5 md:items-end"
+      class="flex h-full w-4/5 flex-col justify-between md:flex-row md:items-end"
     >
       <main class="m-8 flex flex-col items-center gap-8">
         <div class="text-lg uppercase opacity-50">
           So, you want to travel to
         </div>
-        <div class="text-8xl font-serif">SPACE</div>
-        <div class="text-center opacity-50 max-w-md">
+        <div class="font-serif text-8xl">SPACE</div>
+        <div class="max-w-md text-center opacity-50">
           You’ll never have enough time. Space Let’s face it; if you want to go
           to space, you might as well genuinely go to outer space and not hover
           kind of on the edge of it. Well sit back, and relax because we’ll give
@@ -61,7 +59,7 @@ const homeHtml = () => html`
       </main>
       <button
         @click=${() => (window.location.hash = "#destination")}
-        class="ml-auto my-8 text-slate-900 text-3xl bg-white rounded-full p-12 aspect-1/1"
+        class="my-8 ml-auto aspect-1/1 rounded-full bg-white p-12 text-3xl text-slate-900"
       >
         Explore
       </button>
@@ -73,16 +71,16 @@ const homeHtml = () => html`
 const destinationHtml = () =>
   html`<div
     id="destination"
-    class="h-screen flex flex-col items-center text-white bg-cover bg-center bg-no-repeat"
+    class="flex h-screen flex-col items-center bg-cover bg-center bg-no-repeat text-white"
   >
     ${headerHtml()}
-    <main class="m-6 flex flex-col items-center gap-6 h-[85vh] w-4/5">
-      <h2 class="text-lg uppercase tracking-widest opacity-80 md:self-start">
-        <span class="font-bold mr-2">01</span> Pick your destination
+    <main class="m-6 flex h-[85vh] w-4/5 flex-col items-center gap-6">
+      <h2 class="text-lg tracking-widest uppercase opacity-80 md:self-start">
+        <span class="mr-2 font-bold">01</span> Pick your destination
       </h2>
-      <div class="flex flex-col md:flex-row md:gap-32 md:w-4/5">
+      <div class="flex flex-col md:w-4/5 md:flex-row md:gap-32">
         <div
-          class="flex-grow flex items-center justify-center min-h-0 max-h-1/4 md:max-h-full"
+          class="flex max-h-1/4 min-h-0 flex-grow items-center justify-center md:max-h-full"
         >
           <img
             class="max-h-full max-w-full object-contain"
@@ -100,39 +98,38 @@ const destinationHtml = () =>
                     state.destination = destination;
                     renderBody();
                   }}
-                  class="mx-4 uppercase tracking-widest pb-2 border-b-2 ${destination ==
-                  state.destination
+                  class="${destination == state.destination
                     ? "border-white"
-                    : "border-transparent hover:border-white/50"}"
+                    : "border-transparent hover:border-white/50"} mx-4 border-b-2 pb-2 tracking-widest uppercase"
                 >
                   ${destination.name}
                 </button>`
             )}
           </nav>
-          <h1 class="text-6xl md:text-8xl font-serif uppercase">
+          <h1 class="font-serif text-6xl uppercase md:text-8xl">
             ${state.destination.name}
           </h1>
-          <p class="text-center max-w-md px-4">
+          <p class="max-w-md px-4 text-center">
             ${state.destination.description}
           </p>
-          <div class="flex flex-col gap w-full">
-            <hr class="w-full border-white/25 my-4" />
+          <div class="gap flex w-full flex-col">
+            <hr class="my-4 w-full border-white/25" />
             <div class="flex flex-row justify-center md:justify-between">
               <div class="flex flex-col items-center md:items-start">
-                <div class="text-sm  uppercase tracking-widest">
+                <div class="text-sm tracking-widest uppercase">
                   Avg. Distance
                 </div>
-                <div class="text-2xl uppercase font-serif">
+                <div class="font-serif text-2xl uppercase">
                   ${state.destination.distance}
                 </div>
               </div>
               <div
-                class="hidden md:flex flex-col items-center md:items-start mx-8"
+                class="mx-8 hidden flex-col items-center md:flex md:items-start"
               >
-                <div class="text-sm uppercase tracking-widest">
+                <div class="text-sm tracking-widest uppercase">
                   Est. Travel Time
                 </div>
-                <div class="text-2xl uppercase font-serif">
+                <div class="font-serif text-2xl uppercase">
                   ${state.destination.travel}
                 </div>
               </div>
@@ -146,15 +143,15 @@ const destinationHtml = () =>
 const crewHtml = () =>
   html`<div
     id="crew"
-    class="h-screen flex flex-col items-center text-white bg-cover bg-center bg-no-repeat"
+    class="flex h-screen flex-col items-center bg-cover bg-center bg-no-repeat text-white"
   >
     ${headerHtml()}
-    <main class="m-6 flex flex-col items-center gap-6 h-[85vh] max-w-lg">
-      <h2 class="hidden text-lg uppercase tracking-widest opacity-50">
-        <span class="font-bold mr-2">02</span> Meet your crew
+    <main class="m-6 flex h-[85vh] max-w-lg flex-col items-center gap-6">
+      <h2 class="hidden text-lg tracking-widest uppercase opacity-50">
+        <span class="mr-2 font-bold">02</span> Meet your crew
       </h2>
 
-      <div class="flex-grow flex items-center justify-center min-h-0">
+      <div class="flex min-h-0 flex-grow items-center justify-center">
         <img
           class="max-h-full max-w-full object-contain"
           src=${state.crew.images.png}
@@ -170,16 +167,15 @@ const crewHtml = () =>
                 @click=${() => {
                   state.crew = crew;
                 }}
-                class="mx-4 h-2 w-2 rounded-full filled bg-white ${crew ==
-                state.crew
+                class="filled ${crew == state.crew
                   ? ""
-                  : "opacity-20 hover:bg-white"}"
+                  : "opacity-20 hover:bg-white"} mx-4 h-2 w-2 rounded-full bg-white"
               ></button>`
           )}
         </nav>
-        <div class="uppercase text-sm opacity-33">${state.crew.role}</div>
-        <div class="text-xl font-serif opacity-50">${state.crew.name}</div>
-        <p class="text-center max-w-md px-4 opacity-50">${state.crew.bio}</p>
+        <div class="text-sm uppercase opacity-33">${state.crew.role}</div>
+        <div class="font-serif text-xl opacity-50">${state.crew.name}</div>
+        <p class="max-w-md px-4 text-center opacity-50">${state.crew.bio}</p>
       </div>
     </main>
   </div>`;
@@ -187,17 +183,17 @@ const crewHtml = () =>
 const technologyHtml = () =>
   html`<div
     id="technology"
-    class="h-screen flex flex-col items-center text-white bg-cover bg-center bg-no-repeat"
+    class="flex h-screen flex-col items-center bg-cover bg-center bg-no-repeat text-white"
   >
     ${headerHtml()}
     <main
-      class="m-6 flex flex-col items-center gap-6 h-[85vh] max-w-lg text-blue-200"
+      class="m-6 flex h-[85vh] max-w-lg flex-col items-center gap-6 text-blue-200"
     >
-      <h2 class="text-lg uppercase tracking-widest opacity-50">
-        <span class="font-bold mr-2">03</span> Space launch 101
+      <h2 class="text-lg tracking-widest uppercase opacity-50">
+        <span class="mr-2 font-bold">03</span> Space launch 101
       </h2>
 
-      <div class="flex-grow flex items-center justify-center min-h-0">
+      <div class="flex min-h-0 flex-grow items-center justify-center">
         <img
           class="max-h-full max-w-full object-contain"
           src=${state.technology.images.landscape}
@@ -209,17 +205,17 @@ const technologyHtml = () =>
           (t, i) =>
             html`<button
               @click=${() => (state.technology = t)}
-              class="rounded-full aspect-1/1 bg-transparent border-1"
+              class="aspect-1/1 rounded-full border-1 bg-transparent"
             >
               ${i}
             </button>`
         )}
       </nav>
       <p class="uppercase opacity-50">The technology</p>
-      <h1 class="text-4xl md:text-8xl font-serif uppercase opacity-50">
+      <h1 class="font-serif text-4xl uppercase opacity-50 md:text-8xl">
         ${state.technology.name}
       </h1>
-      <p class="text-center mb-4 opacity-50">${state.technology.description}</p>
+      <p class="mb-4 text-center opacity-50">${state.technology.description}</p>
     </main>
   </div>`;
 
