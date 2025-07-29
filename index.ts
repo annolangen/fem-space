@@ -12,7 +12,7 @@ const headerHtml = () =>
   html`<header
     class="relative flex w-full flex-row items-center justify-between px-6 pt-6"
   >
-    <img src="/assets/shared/logo.svg" alt="logo" class="h-8 w-8" />
+    <img src="./assets/shared/logo.svg" alt="logo" class="h-8 w-8" />
     <input type="checkbox" id="menu" class="peer sr-only" />
     <label for="menu" id="menu-button" class="z-20 md:hidden"></label>
     <nav
